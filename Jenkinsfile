@@ -2,9 +2,13 @@ pipeline {
    agent any
 
    stages {
-      stage('Hello') {
+      stage('Build image') {
          steps {
-            sh(script: 'echo "Hello World!"')
+            sh(script: """
+               cd azure-vote
+               docker build -t azure-vote .
+               docker images -a
+            """)
          }
       }
    }
